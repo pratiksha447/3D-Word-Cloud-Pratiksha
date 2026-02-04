@@ -9,12 +9,21 @@ const SAMPLE_URLS = [
   "https://www.nytimes.com"
 ];
 
+/**
+ * Top-level application component.
+ * Manages UI state, triggers analysis requests and renders the 3D word cloud
+ * and HUD when keywords are available.
+ */
 function App() {
   const [url, setUrl] = useState<string>(SAMPLE_URLS[0]);
   const [words, setWords] = useState<WordItem[]>([]);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
 
+  /**
+   * Fetch keywords for the current `url` and update UI state.
+   * Handles loading and error states appropriately.
+   */
   const handleAnalyze = async () => {
     setLoading(true);
     setError(null);

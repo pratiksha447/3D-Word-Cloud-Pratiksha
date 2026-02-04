@@ -8,6 +8,10 @@ interface WordCloud3DProps {
   words: WordItem[];
 }
 
+/**
+ * Return a random point on the surface of a sphere of the given `radius`.
+ * Uses uniform sampling on the sphere via spherical coordinates.
+ */
 function randomOnSphere(radius: number) {
   const u = Math.random();
   const v = Math.random();
@@ -19,6 +23,10 @@ function randomOnSphere(radius: number) {
   return [x, y, z] as [number, number, number];
 }
 
+/**
+ * Map a normalized weight in [0,1] to an RGB color string.
+ * Lower weights trend towards blue; higher weights trend towards pink.
+ */
 function weightToColor(weight: number): string {
   // 0 -> blue, 1 -> pink
   const t = Math.min(Math.max(weight, 0), 1);
@@ -28,6 +36,10 @@ function weightToColor(weight: number): string {
   return `rgb(${r}, ${g}, ${b})`;
 }
 
+/**
+ * Internal component that positions words on a sphere and renders them as
+ * 3D text using @react-three/fiber and @react-three/drei.
+ */
 const WordCloud3DInner: React.FC<WordCloud3DProps> = ({ words }) => {
   const positioned = useMemo(() => {
     const radius = 4;
@@ -62,6 +74,9 @@ const WordCloud3DInner: React.FC<WordCloud3DProps> = ({ words }) => {
   );
 };
 
+/**
+ * Top-level component embedding the 3D canvas and rendering the word cloud.
+ */
 export const WordCloud3D: React.FC<WordCloud3DProps> = ({ words }) => {
   return (
     <Canvas camera={{ position: [0, 0, 10], fov: 60 }}>

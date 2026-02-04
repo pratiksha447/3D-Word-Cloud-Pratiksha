@@ -6,6 +6,10 @@ interface HUDProps {
   words: WordItem[];
 }
 
+/**
+ * Heads-up display showing the top N words and their weights.
+ * Renders a small overlay with the first five words (by rank/weight).
+ */
 export const HUD: React.FC<HUDProps> = ({ words }) => {
   const top = words.slice(0, 5);
   return (
