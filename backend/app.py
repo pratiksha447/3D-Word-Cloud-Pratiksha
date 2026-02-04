@@ -23,6 +23,13 @@ class AnalyzeResponse(BaseModel):
 
 app = FastAPI(title="3D Word Cloud API")
 
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=["*"],
+    allow_credentials=True,
+    allow_methods=["*"],
+    allow_headers=["*"],
+)
 
 @app.get("/health")
 def health() -> dict:
